@@ -8,23 +8,36 @@
 import SwiftSyntax
 
 extension DeclSyntaxProtocol {
-    public var typeName: TokenSyntax? {
+    public var declaration: DeclarationSyntax? {
         if let declaration = self.as(StructDeclSyntax.self) {
-            return declaration.name
+            return declaration
         }
         if let declaration = self.as(ClassDeclSyntax.self) {
-            return declaration.name
+            return declaration
         }
         if let declaration = self.as(ActorDeclSyntax.self) {
-            return declaration.name
+            return declaration
         }
         if let declaration = self.as(EnumDeclSyntax.self) {
-            return declaration.name
+            return declaration
         }
         if let declaration = self.as(ProtocolDeclSyntax.self) {
-            return declaration.name
+            return declaration
         }
         
         return nil
+    }
+    public var typeName: TokenSyntax? {
+        guard let declaration = declaration as? DeclarationSyntax else {
+            return nil
+        }
+        return declaration.name
+    }
+    
+    public var accessLevel: AccessLevel? {
+        guard let declaration = declaration as? DeclarationSyntax else {
+            return nil
+        }
+        return declaration.accessLevel
     }
 }
