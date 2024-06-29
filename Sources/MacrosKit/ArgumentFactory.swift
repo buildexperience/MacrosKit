@@ -10,8 +10,8 @@ import SwiftSyntax
 extension AttributeSyntax.Arguments {
     /// The macro arguments.
     ///
-    /// - Returns: An array of ``(name: TokenSyntax?, value: TokenSyntax?)`` representing the arguments.
-    public var arguments: [TokenSyntax?: TokenSyntax?] {
+    /// - Returns: A dictionary ``[TokenSyntax?: TokenSyntax]`` representing the arguments.
+    public var arguments: [TokenSyntax?: TokenSyntax] {
         guard let arguments = self.as(LabeledExprListSyntax.self) else {
             return [:]
         }
