@@ -1,5 +1,5 @@
 //
-//  ArgumentFactory.swift
+//  AttributeSyntax.Arguments+Extension.swift
 //
 //
 //  Created by Joe Maghzal on 29/06/2024.
@@ -26,8 +26,8 @@ extension AttributeSyntax.Arguments {
 }
 
 /// Factory for getting the value of an ``ExprSyntax``.
-internal enum ArgumentFactory {
-    internal static func make(for syntax: ExprSyntax) -> TokenSyntax? {
+fileprivate enum ArgumentFactory {
+    fileprivate static func make(for syntax: ExprSyntax) -> TokenSyntax? {
         if let stringExpression = syntax.as(StringLiteralExprSyntax.self),
            let segment = stringExpression.segments.first,
            let value = segment.as(StringSegmentSyntax.self)?.content
