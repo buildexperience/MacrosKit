@@ -11,16 +11,16 @@ extension AttributeSyntax.Arguments {
     /// The macro arguments.
     ///
     /// - Returns: An array of ``(name: TokenSyntax?, value: TokenSyntax?)`` representing the arguments.
-    public var arguments: [(name: TokenSyntax?, value: TokenSyntax?)] {
+    public var arguments: [TokenSyntax?: TokenSyntax?] {
         guard let arguments = self.as(LabeledExprListSyntax.self) else {
-            return []
+            return [:]
         }
-        return arguments.map { argument in
+        
+        return arguments.reduce(into: [:]) { partialResult, argument in
             let expression = argument.expression
             let name = argument.label
             let value = ArgumentFactory.make(for: expression)
-            
-            return (name: name, value: value)
+            partialResult[name] = value
         }
     }
 }
