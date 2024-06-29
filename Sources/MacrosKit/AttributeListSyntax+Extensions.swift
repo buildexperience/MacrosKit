@@ -25,15 +25,19 @@ extension AttributeListSyntax.Element {
         return attributeName?.name
     }
     
-    /// The argument name of the attribute.
+    /// The macro arguments.
     ///
-    /// - Returns: An optional ``TokenSyntax`` representing the argument name of the attribute,
-    /// or ``nil`` if the argument name cannot be determined.
-    public var argumentName: TokenSyntax? {
-        let arguments = attribute?.arguments
-        let expression = arguments?.as(LabeledExprListSyntax.self)?.first?.expression
-        let segment = expression?.as(StringLiteralExprSyntax.self)?.segments.first
-        let attributeName = segment?.as(StringSegmentSyntax.self)?.content
-        return attributeName
+    /// - Returns: An array of ``(name: TokenSyntax?, value: TokenSyntax?)`` representing the arguments.
+    public var arguments: [(name: TokenSyntax?, value: TokenSyntax?)] {
+        guard let arguments = attribute?.arguments?.as(LabeledExprListSyntax.self) else {
+            return []
+        }
+        return arguments.map { argument in
+            let expression = argument.expression
+            let name = argument.label
+            let value = ArgumentFactory.make(for: expression)
+            
+            return (name: name, value: value)
+        }
     }
 }
