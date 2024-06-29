@@ -7,6 +7,24 @@
 
 import SwiftSyntax
 
+extension AttributeSyntax.Arguments {
+    /// The macro arguments.
+    ///
+    /// - Returns: An array of ``(name: TokenSyntax?, value: TokenSyntax?)`` representing the arguments.
+    public var arguments: [(name: TokenSyntax?, value: TokenSyntax?)] {
+        guard let arguments = self.as(LabeledExprListSyntax.self) else {
+            return []
+        }
+        return arguments.map { argument in
+            let expression = argument.expression
+            let name = argument.label
+            let value = ArgumentFactory.make(for: expression)
+            
+            return (name: name, value: value)
+        }
+    }
+}
+
 /// Factory for getting the value of an ``ExprSyntax``.
 internal enum ArgumentFactory {
     internal static func make(for syntax: ExprSyntax) -> TokenSyntax? {
