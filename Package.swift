@@ -24,14 +24,8 @@ let package = Package(
         .target(
             name: "MacrosKit",
             dependencies: [
-                .product(name: "SwiftSyntaxMacrosTestSupport", package: "swift-syntax"),
+                .product(name: "SwiftSyntaxMacros", package: "swift-syntax"),
             ]
-        ),
-        .testTarget(
-            name: "MacrosKitTests",
-            dependencies: [
-                "MacrosKit"
-            ]
-        ),
+        )
     ]
 )
