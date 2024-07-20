@@ -9,6 +9,18 @@ import SwiftSyntax
 
 /// Factory for getting the value of an ``ExprSyntax``.
 internal enum ArgumentFactory {
+    /// Creates a ``TokenSyntax`` from the given macro argument.
+    ///
+    /// This method supports several expression types:
+    /// - ``StringLiteralExprSyntax``.
+    /// - ``MemberAccessExprSyntax``.
+    /// - ``KeyPathExprSyntax``.
+    /// - ``BooleanLiteralExprSyntax``.
+    ///
+    /// - Parameter syntax: The expression syntax to convert.
+    ///
+    /// - Returns: A ``TokenSyntax`` representing the given macro argument,
+    /// or ``nil`` if the expression type is unsupported.
     internal static func make(for syntax: ExprSyntax) -> TokenSyntax? {
         if let stringExpression = syntax.as(StringLiteralExprSyntax.self),
            let segment = stringExpression.segments.first,

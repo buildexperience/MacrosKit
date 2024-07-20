@@ -8,6 +8,7 @@
 import SwiftSyntax
 
 extension Bool {
+    /// The `TokenSyntax` representation.
     public var macroExpression: TokenSyntax {
         return "\(raw: self)"
     }
