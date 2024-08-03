@@ -29,10 +29,9 @@ internal enum ArgumentFactory {
             return value
         }
         
-        if let memberExpression = syntax.as(MemberAccessExprSyntax.self),
-           let base = memberExpression.base?.as(DeclReferenceExprSyntax.self)
-        {
-            return base.baseName
+        if let memberExpression = syntax.as(MemberAccessExprSyntax.self) {
+            let base = memberExpression.base?.as(DeclReferenceExprSyntax.self)
+            return base?.baseName ?? memberExpression.declName.baseName
         }
         
         if let keyPathExpression = syntax.as(KeyPathExprSyntax.self),
