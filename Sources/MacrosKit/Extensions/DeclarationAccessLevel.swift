@@ -8,43 +8,33 @@
 import SwiftSyntax
 
 /// The different levels of access control for code elements.
-public enum AccessLevel: CaseIterable {
+public enum AccessLevel: String, CaseIterable {
     /// Public access level.
-    case `public`
+    case `public` = "public"
     
     /// Package private access level.
-    case `package`
+    case `package` = "package"
     
     /// Internal access level.
-    case `internal`
+    case `internal` = "internal"
     
     /// Private access level.
-    case `private`
+    case `private` = "private"
     
     /// Fileprivate access level.
-    case `fileprivate`
+    case `fileprivate` = "fileprivate"
     
     /// Open access level.
-    case `open`
-    
+    case `open` = "open"
+}
+
+// MARK: - Propeties
+extension AccessLevel {
     /// The name of the access level.
     ///
     /// - Returns: A ``TokenSyntax`` representing the name of the access level.
     public var name: TokenSyntax {
-        switch self {
-            case .public:
-                return "public"
-            case .package:
-                return "package"
-            case .internal:
-                return "internal"
-            case .private:
-                return "private"
-            case .fileprivate:
-                return "fileprivate"
-            case .open:
-                return "open"
-        }
+        return "\(raw: rawValue)"
     }
     
     /// The modifier of the access level.
