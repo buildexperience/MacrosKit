@@ -45,12 +45,4 @@ extension DeclSyntaxProtocol {
         }
         return declaration.inheritanceClause?.inheritedTypes
     }
-    
-    /// Retrieves the access level from the declaration.
-    public var accessLevel: AccessLevel? {
-        guard let declaration = declaration else {
-            return nil
-        }
-        return declaration.accessLevel
-    }
 }

@@ -48,3 +48,33 @@ internal enum ArgumentFactory {
         return nil
     }
 }
+
+extension AttributeSyntax.Arguments {
+    /// The named macro arguments.
+    public var named: [String: TokenSyntax] {
+        guard let arguments = self.as(LabeledExprListSyntax.self) else {
+            return [:]
+        }
+        var dictionary = [String: TokenSyntax]()
+        
+        for argument in arguments {
+            guard let name = argument.label?.text else {continue}
+            dictionary[name] = ArgumentFactory.make(for: argument.expression)
+        }
+        
+        return dictionary
+    }
+    
+    /// The unnamed macro arguments.
+    public var unnamed: [TokenSyntax] {
+        guard let arguments = self.as(LabeledExprListSyntax.self) else {
+            return []
+        }
+        return arguments.compactMap { argument in
+            guard argument.label?.text == nil else {
+                return nil
+            }
+            return ArgumentFactory.make(for: argument.expression)
+        }
+    }
+}

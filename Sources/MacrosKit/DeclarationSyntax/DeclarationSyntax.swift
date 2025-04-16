@@ -18,10 +18,3 @@ public protocol DeclarationSyntax {
     /// The list of modifiers applied to the type.
     var modifiers: DeclModifierListSyntax {get}
 }
-
-extension DeclarationSyntax {
-    /// The access level of the declaration, if specified.
-    public var accessLevel: AccessLevel? {
-        return modifiers.accessLevel
-    }
-}

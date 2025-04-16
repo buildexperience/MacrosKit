@@ -24,16 +24,4 @@ extension AttributeListSyntax.Element {
         let attributeName = attribute?.attributeName.as(IdentifierTypeSyntax.self)
         return attributeName?.name
     }
-    
-    /// The argument name of the attribute.
-    ///
-    /// - Returns: An optional ``TokenSyntax`` representing the argument name of the attribute,
-    /// or ``nil`` if the argument name cannot be determined.
-    public var argumentName: TokenSyntax? {
-        let arguments = attribute?.arguments
-        let expression = arguments?.as(LabeledExprListSyntax.self)?.first?.expression
-        let segment = expression?.as(StringLiteralExprSyntax.self)?.segments.first
-        let attributeName = segment?.as(StringSegmentSyntax.self)?.content
-        return attributeName
-    }
 }
