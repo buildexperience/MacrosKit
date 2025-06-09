@@ -8,6 +8,9 @@ let package = Package(
         .iOS(.v13),
         .macOS(.v10_15),
         .watchOS(.v6),
+        .tvOS(.v13),
+        .visionOS(.v1),
+        .macCatalyst(.v13)
     ],
     products: [
         .library(
@@ -20,7 +23,7 @@ let package = Package(
     dependencies: [
         .package(
             url: "https://github.com/swiftlang/swift-syntax.git",
-            from: "600.0.0"
+            from: "601.0.0"
         ),
     ],
     targets: [
