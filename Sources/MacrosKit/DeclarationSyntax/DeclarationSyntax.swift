@@ -17,4 +17,6 @@ public protocol DeclarationSyntax {
     
     /// The list of modifiers applied to the type.
     var modifiers: DeclModifierListSyntax {get}
+    
+    var attributes:  AttributeListSyntax {get}
 }
